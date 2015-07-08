@@ -18,7 +18,7 @@ public class AsyncRestClient extends AsyncTask<Void,Void,String> {
         POST
     }
 
-    private ServerConnectorDTO mServerConnectorDTO;
+    private ServerConnector mServerConnectorDTO;
     private HttpTaskListener mHttpTaskListener;
     private RequestMethod method;
     private int taskId;
@@ -30,7 +30,7 @@ public class AsyncRestClient extends AsyncTask<Void,Void,String> {
      * @param listener the callback for task operation. Can be null
      * */
 
-    public AsyncRestClient(int taskId, RequestMethod method, ServerConnectorDTO serverConnectorDTO, HttpTaskListener listener){
+    public AsyncRestClient(int taskId, RequestMethod method, ServerConnector serverConnectorDTO, HttpTaskListener listener){
 
         if(serverConnectorDTO!=null){
             mServerConnectorDTO = serverConnectorDTO;
@@ -56,7 +56,7 @@ public class AsyncRestClient extends AsyncTask<Void,Void,String> {
      * @param listener the callback for task operation. Can be null
      * */
 
-    public AsyncRestClient(RequestMethod method, ServerConnectorDTO serverConnectorDTO, HttpTaskListener listener){
+    public AsyncRestClient(RequestMethod method, ServerConnector serverConnectorDTO, HttpTaskListener listener){
 
         if(serverConnectorDTO!=null){
             mServerConnectorDTO = serverConnectorDTO;
@@ -89,10 +89,11 @@ public class AsyncRestClient extends AsyncTask<Void,Void,String> {
 
         String serverResponse = null;
 
+
         switch (method){
             case GET:
                 try {
-                    serverResponse = new HttpGetServerConnector(mServerConnectorDTO).connectServerWithHttpGetRequest();
+                    serverResponse = new HttpGetServer(mServerConnectorDTO).connectServerWithHttpGetRequest();
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "";
@@ -101,7 +102,7 @@ public class AsyncRestClient extends AsyncTask<Void,Void,String> {
 
             case POST:
                 try {
-                    serverResponse = new HttpPostServerConnector(mServerConnectorDTO).connectServerWithHttpPostRequest();
+                    serverResponse = new HttpPostServer(mServerConnectorDTO).connectServerWithHttpPostRequest();
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "";

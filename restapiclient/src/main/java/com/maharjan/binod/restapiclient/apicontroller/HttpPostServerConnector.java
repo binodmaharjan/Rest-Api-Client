@@ -22,9 +22,9 @@ public class HttpPostServerConnector {
 
     private final String TAG = HttpPostServerConnector.class.getName();
     private String serverResponse;
-    private ServerConnectorDTO serverConnectorDto;
+    private ServerConnector serverConnectorDto;
 
-    public HttpPostServerConnector(ServerConnectorDTO connector){
+    public HttpPostServerConnector(ServerConnector connector){
 
         this.serverConnectorDto = connector;
 
@@ -114,7 +114,7 @@ public class HttpPostServerConnector {
 
 
 
-        if(serverConnectorDto.getFileEntity()!=null)
+       /* if(serverConnectorDto.getFileEntity()!=null)
         {
 
             try {
@@ -152,7 +152,7 @@ public class HttpPostServerConnector {
                 e.printStackTrace();
 
             }
-        }
+        }*/
 
 
 

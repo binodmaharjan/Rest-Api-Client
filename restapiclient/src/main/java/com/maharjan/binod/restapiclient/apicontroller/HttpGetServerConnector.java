@@ -19,10 +19,10 @@ import java.io.InputStreamReader;
 public class HttpGetServerConnector {
 
 	private String serverResponse;
-	private ServerConnectorDTO serverConnectorDto;
+	private ServerConnector serverConnectorDto;
 	
 	
-	public HttpGetServerConnector(ServerConnectorDTO connector){
+	public HttpGetServerConnector(ServerConnector connector){
 		this.serverConnectorDto = connector;
 	}
 	

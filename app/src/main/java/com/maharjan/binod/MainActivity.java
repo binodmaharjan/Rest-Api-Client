@@ -1,29 +1,50 @@
 package com.maharjan.binod;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.maharjan.binod.restapiclient.apicontroller.AppLog;
 import com.maharjan.binod.restapiclient.apicontroller.AsyncRestClient;
 import com.maharjan.binod.restapiclient.apicontroller.FailureReason;
 import com.maharjan.binod.restapiclient.apicontroller.HttpTaskListener;
-import com.maharjan.binod.restapiclient.apicontroller.ServerConnectorDTO;
+import com.maharjan.binod.restapiclient.apicontroller.RequestParams;
+import com.maharjan.binod.restapiclient.apicontroller.ServerConnector;
+
+import java.util.Iterator;
+import java.util.Map;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        RequestParams params=new RequestParams();
+        params.add("hello","ello");
+        params.add("hello1","1ello");
+
+        Iterator it = params.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
         // for GET
-        ServerConnectorDTO connectorDTO = new ServerConnectorDTO();
+      /*  ServerConnectorDTO connectorDTO = new ServerConnectorDTO();
         connectorDTO.setUrlToConnect("http://www.binod-maharjan.com.np/laugh/index.php/appconfig/controller?id=1&format=json");
-        AsyncRestClient apiFetchTask = new AsyncRestClient(AsyncRestClient.RequestMethod.GET, connectorDTO, new HttpTaskListener() {
+*/
+
+
+
+     /*   ServerConnector connector=new ServerConnector.Builder("http://www.binod-maharjan.com.np/laugh/index.php/appconfig/controller?id=1")
+                                                     .build();
+
+        AsyncRestClient apiFetchTask = new AsyncRestClient(AsyncRestClient.RequestMethod.GET, connector, new HttpTaskListener() {
             @Override
             public void onApiResponseSuccess(int taskId, String response) {
                 // response from server
@@ -46,28 +67,37 @@ public class MainActivity extends ActionBarActivity {
             public void onApiResponseCancel(int taskId) {
             }
         });
-        apiFetchTask.execute();
+        apiFetchTask.execute();*/
 
         // for POST
 
-                // request params
-                  /*     List<BasicNameValuePair> params=new ArrayList<>();
-        params.add(new BasicNameValuePair("id","1"));
-        params.add(new BasicNameValuePair("name","Ram"));
-        params.add(new BasicNameValuePair("age", "10"));
+                // request para
+       RequestParams params1=new RequestParams();
+        params1.add("id", "1");
+        params1.add("name", "2");
+        params1.add("age", "3");
+        params1.add("fullName","RAm");
 
-        ServerConnectorDTO connectorDTO1 = new ServerConnectorDTO();
-        connectorDTO.setUrlToConnect("http://www.binod-maharjan.com.np/laugh/index.php/appconfig/entry");
-        connectorDTO.setDataListNameValuePair(params);
+        ServerConnector connector=new ServerConnector.Builder("https://www.incentiveholidays.com/api/photocategory/image")
+               .addParams(params1)
+                .build();
 
-        AsyncRestClient postTask=new AsyncRestClient(AsyncRestClient.RequestMethod.POST,connectorDTO, new HttpTaskListener() {
+
+        AppLog.logString("params object:::"+connector.getParams());
+
+
+
+        AsyncRestClient postTask=new AsyncRestClient(AsyncRestClient.RequestMethod.POST,connector, new HttpTaskListener() {
             @Override
             public void onApiResponseSuccess(int taskId, String response) {
+
+                AppLog.logString("response:::"+response);
 
             }
 
             @Override
             public void onApiResponseFailure(int taskId, FailureReason reason) {
+                AppLog.logString("response:::"+reason.toString());
 
             }
 
@@ -82,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        postTask.execute();*/
+        postTask.execute();
 
 
     }
